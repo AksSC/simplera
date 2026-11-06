@@ -1,0 +1,3 @@
+BEGIN T1
+READ T1 unknown_table 0
+COMMIT T1

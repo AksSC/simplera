@@ -1,0 +1,9 @@
+BEGIN T1 [TS=1]
+T1 requests shared lock(10 0)
+Lock granted
+READ T1 10 0
+T1 requests exclusive lock(10 0)
+Lock granted
+WRITE T1 10 0
+COMMIT T1
+unlock(10 0) by T1

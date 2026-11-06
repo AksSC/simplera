@@ -1,0 +1,46 @@
+BEGIN T1 [TS=1]
+BEGIN T2 [TS=2]
+BEGIN T3 [TS=3]
+T1 requests shared lock(10 0)
+Lock granted
+READ T1 10 0
+T2 requests shared lock(10 0)
+Lock granted
+READ T2 10 0
+T1 requests exclusive lock(10 0)
+T1 waits (older transaction allowed to wait)
+T3 requests shared lock(10 0)
+Lock granted
+READ T3 10 0
+T2 requests exclusive lock(10 0)
+T2 dies (younger transaction cannot wait for older)
+ABORT T2
+ROLLBACK T2
+unlock(10 0) by T2
+T3 requests exclusive lock(10 0)
+T3 dies (younger transaction cannot wait for older)
+ABORT T3
+ROLLBACK T3
+unlock(10 0) by T3
+T1 exclusive lock(10 0) granted
+WRITE T1 10 0
+COMMIT T1
+unlock(10 0) by T1
+Restart T2 [TS=4]
+T2 requests shared lock(10 0)
+Lock granted
+READ T2 10 0
+T2 requests exclusive lock(10 0)
+Lock granted
+WRITE T2 10 0
+COMMIT T2
+unlock(10 0) by T2
+Restart T3 [TS=5]
+T3 requests shared lock(10 0)
+Lock granted
+READ T3 10 0
+T3 requests exclusive lock(10 0)
+Lock granted
+WRITE T3 10 0
+COMMIT T3
+unlock(10 0) by T3

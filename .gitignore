@@ -1,0 +1,6 @@
+# C++ build products and runtime scratch files
+src/*.o
+src/executors/*.o
+src/server
+src/log
+data/temp/
